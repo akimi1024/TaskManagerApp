@@ -9,7 +9,7 @@ namespace TaskManagerApp
             InitializeComponent();
         }
 
-        private void AddTask_Clik(object sender, EventArgs e)
+        private void AddTask_Click(object sender, EventArgs e)
         {
             var text = TaskTextBox.Text.Trim();
             if (!string.IsNullOrEmpty(text))
@@ -17,6 +17,11 @@ namespace TaskManagerApp
                 TaskListBox.Items.Add(text);
                 TaskTextBox.Clear();
             }
+        }
+
+        private void TaskTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
         }
     }
 }
