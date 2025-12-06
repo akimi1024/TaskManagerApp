@@ -1,11 +1,12 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using TaskManagerApp.Models;
 
 namespace TaskManagerApp
 {
     public partial class MainWindow : Window
     {
-        private List<TaskItem> taskItems = [];
+        private ObservableCollection<TaskItem> taskItems = [];
 
         public MainWindow()
         {
@@ -21,9 +22,6 @@ namespace TaskManagerApp
                 // Add the new task to the list
                 taskItems.Add(new TaskItem { Title = text });
                 TaskTextBox.Clear();
-
-                // Refresh the ListBox to show the new task
-                TaskListBox.Items.Refresh();
             }
         }
 
@@ -32,7 +30,6 @@ namespace TaskManagerApp
             if(TaskListBox.SelectedItem is TaskItem selectedTask)
             {
                 taskItems.Remove(selectedTask);
-                TaskListBox.Items.Refresh();
             }
         }
 
