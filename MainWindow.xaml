@@ -9,8 +9,8 @@
 
     <StackPanel Margin="20">
         <TextBox x:Name="TaskTextBox" Margin="0 0 0 10" />
-        <Button Content="追加" Click="AddTask_Click" Margin="0 0 0 10" />
-        <Button Content="削除" Click="DeleteTask_Click" Margin="0 0 0 10" />
-        <ListBox x:Name="TaskListBox" />
+        <Button x:Name="AddButton" Content="追加" Click="AddTask_Click" Margin="0 0 0 10" />
+        <Button x:Name="DeleteButton" IsEnabled="False" Content="削除" Click="DeleteTask_Click" Margin="0 0 0 10" />
+        <ListBox x:Name="TaskListBox" SelectionChanged="TaskListBox_SelectionChanged"/>
     </StackPanel>
 </Window>
