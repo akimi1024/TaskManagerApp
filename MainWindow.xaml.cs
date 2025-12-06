@@ -13,7 +13,7 @@ namespace TaskManagerApp
             TaskListBox.ItemsSource = taskItems;
         }
 
-        private void AddTask_Click(object sender, EventArgs e)
+        private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             var text = TaskTextBox.Text.Trim();
             if (!string.IsNullOrEmpty(text))
@@ -23,6 +23,15 @@ namespace TaskManagerApp
                 TaskTextBox.Clear();
 
                 // Refresh the ListBox to show the new task
+                TaskListBox.Items.Refresh();
+            }
+        }
+
+        private  void DeleteTask_Click(object sender, RoutedEventArgs e)
+        {
+            if(TaskListBox.SelectedItem is TaskItem selectedTask)
+            {
+                taskItems.Remove(selectedTask);
                 TaskListBox.Items.Refresh();
             }
         }
