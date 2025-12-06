@@ -30,12 +30,20 @@ namespace TaskManagerApp
             if(TaskListBox.SelectedItem is TaskItem selectedTask)
             {
                 taskItems.Remove(selectedTask);
+
+                DeleteButton.IsEnabled = false;
             }
         }
 
         private void TaskTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
+        }
+
+        private void TaskListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var hasSelection = TaskListBox.SelectedItem != null;
+            DeleteButton.IsEnabled = hasSelection;
         }
     }
 }
