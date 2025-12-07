@@ -1,17 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using TaskManagerApp.Models;
+using TaskManagerApp.ViewModels;
 
 namespace TaskManagerApp
 {
     public partial class MainWindow : Window
     {
-        private ObservableCollection<TaskItem> taskItems = [];
+        private MainViewModel viewModel = new MainViewModel();
 
         public MainWindow()
         {
             InitializeComponent();
-            TaskListBox.ItemsSource = taskItems;
+            DataContext = viewModel;
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
@@ -19,8 +20,7 @@ namespace TaskManagerApp
             var text = TaskTextBox.Text.Trim();
             if (!string.IsNullOrEmpty(text))
             {
-                // Add the new task to the list
-                taskItems.Add(new TaskItem { Title = text });
+                viewModel.AddTask(text);
                 TaskTextBox.Clear();
             }
         }
@@ -29,8 +29,7 @@ namespace TaskManagerApp
         {
             if(TaskListBox.SelectedItem is TaskItem selectedTask)
             {
-                taskItems.Remove(selectedTask);
-
+                viewModel.DeleteTask(selectedTask);
                 DeleteButton.IsEnabled = false;
             }
         }

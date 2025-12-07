@@ -11,6 +11,6 @@
         <TextBox x:Name="TaskTextBox" Margin="0 0 0 10" />
         <Button x:Name="AddButton" Content="追加" Click="AddTask_Click" Margin="0 0 0 10" />
         <Button x:Name="DeleteButton" IsEnabled="False" Content="削除" Click="DeleteTask_Click" Margin="0 0 0 10" />
-        <ListBox x:Name="TaskListBox" SelectionChanged="TaskListBox_SelectionChanged"/>
+        <ListBox x:Name="TaskListBox" ItemsSource="{Binding Tasks}" SelectionChanged="TaskListBox_SelectionChanged"/>
     </StackPanel>
 </Window>
