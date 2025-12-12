@@ -1,16 +1,34 @@
 ﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.ComponentModel;
 using TaskManagerApp.Models;
 
 namespace TaskManagerApp.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<TaskItem> Tasks { get; } = new ObservableCollection<TaskItem>();
+        private TaskItem? _SelectedTask;
+        public TaskItem? SelectedTask { 
+            get => _SelectedTask; 
+            set 
+            { 
+                _SelectedTask = value;
+                OnPropertyChanged("SelectedTask");
+                OnPropertyChanged("CanDelete");
+            }
+        }
+        public bool CanDelete => SelectedTask != null;
+
 
         public MainViewModel()
         {
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void AddTask(string title)
@@ -18,14 +36,10 @@ namespace TaskManagerApp.ViewModels
             Tasks.Add(new TaskItem { Title =  title});
         }
 
-        public void DeleteTask(TaskItem task)
+        public void DeleteTask()
         {
-            Tasks.Remove(task);
+            Tasks.Remove(SelectedTask!);
+            SelectedTask = null;
         }
-
-        //public bool IsTaskSelection()
-        //{
-            
-        //}
     }
 }

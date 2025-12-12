@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using TaskManagerApp.Models;
 using TaskManagerApp.ViewModels;
 
@@ -29,8 +28,7 @@ namespace TaskManagerApp
         {
             if(TaskListBox.SelectedItem is TaskItem selectedTask)
             {
-                viewModel.DeleteTask(selectedTask);
-                DeleteButton.IsEnabled = false;
+                viewModel.DeleteTask();
             }
         }
 
@@ -41,8 +39,7 @@ namespace TaskManagerApp
 
         private void TaskListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            var hasSelection = TaskListBox.SelectedItem != null;
-            DeleteButton.IsEnabled = hasSelection;
+            viewModel.SelectedTask = (TaskItem)TaskListBox.SelectedItem!;
         }
     }
 }
