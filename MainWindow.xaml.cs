@@ -12,6 +12,7 @@ namespace TaskManagerApp
         {
             InitializeComponent();
             DataContext = viewModel;
+            viewModel.LoadTasks();
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
