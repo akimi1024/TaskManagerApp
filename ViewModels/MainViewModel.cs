@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using TaskManagerApp.Models;
 
@@ -16,15 +17,36 @@ namespace TaskManagerApp.ViewModels
             set 
             { 
                 _SelectedTask = value;
+                DeleteTaskCommand.RaiseCanExecuteChanged();
                 OnPropertyChanged("SelectedTask");
                 OnPropertyChanged("CanDelete");
             }
         }
+
+        private string _NewTaskTitle;
+        public string NewTaskTitle
+        {
+            get => _NewTaskTitle;
+            set
+            {
+                _NewTaskTitle = value;
+                OnPropertyChanged(nameof(NewTaskTitle));
+                AddTaskCommand.RaiseCanExecuteChanged();
+            }
+        }
         public bool CanDelete => SelectedTask != null;
 
+        public RelayCommand AddTaskCommand { get; }
+
+        public RelayCommand DeleteTaskCommand { get; }
 
         public MainViewModel()
         {
+            AddTaskCommand = new RelayCommand(
+                _ => AddTask(NewTaskTitle),
+                _ => !string.IsNullOrWhiteSpace(NewTaskTitle)
+            );
+            DeleteTaskCommand = new RelayCommand(_ => DeleteTask(), _ => CanDelete);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -37,6 +59,7 @@ namespace TaskManagerApp.ViewModels
         public void AddTask(string title)
         {
             Tasks.Add(new TaskItem { Title =  title});
+            NewTaskTitle = string.Empty;
             SaveTasks();
         }
 

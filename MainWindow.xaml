@@ -8,9 +8,9 @@
         Title="Task Manager" Height="350" Width="400">
 
     <StackPanel Margin="20">
-        <TextBox x:Name="TaskTextBox" Margin="0 0 0 10" />
-        <Button x:Name="AddButton" Content="追加" Click="AddTask_Click" Margin="0 0 0 10" />
-        <Button x:Name="DeleteButton" IsEnabled="{Binding CanDelete}" Content="削除" Click="DeleteTask_Click" Margin="0 0 0 10" />
-        <ListBox x:Name="TaskListBox" ItemsSource="{Binding Tasks}" SelectionChanged="TaskListBox_SelectionChanged"/>
+        <TextBox Text="{Binding NewTaskTitle, UpdateSourceTrigger=PropertyChanged}"  Margin="0 0 0 10"/>
+        <Button x:Name="AddButton" Content="追加" Command="{Binding AddTaskCommand}" Margin="0 0 0 10" />
+        <Button x:Name="DeleteButton" IsEnabled="{Binding CanDelete}" Content="削除" Command="{Binding DeleteTaskCommand}" Margin="0 0 0 10" />
+        <ListBox ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}" />
     </StackPanel>
 </Window>
