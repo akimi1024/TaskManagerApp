@@ -11,6 +11,17 @@
         <TextBox Text="{Binding NewTaskTitle, UpdateSourceTrigger=PropertyChanged}"  Margin="0 0 0 10"/>
         <Button x:Name="AddButton" Content="追加" Command="{Binding AddTaskCommand}" Margin="0 0 0 10" />
         <Button x:Name="DeleteButton" IsEnabled="{Binding CanDelete}" Content="削除" Command="{Binding DeleteTaskCommand}" Margin="0 0 0 10" />
-        <ListBox ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask, Mode=TwoWay}" />
+        <ListBox ItemsSource="{Binding Tasks}"
+                 SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+               
+        </ListBox>
+
     </StackPanel>
 </Window>
