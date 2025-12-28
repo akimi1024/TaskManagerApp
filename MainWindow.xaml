@@ -15,13 +15,19 @@
                  SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Title}" />
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Title}" 
+                               VerticalAlignment="Center"
+                               MinHeight="32"
+                               Padding="5"
+                               Margin="5"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-               
         </ListBox>
-
     </StackPanel>
 </Window>
